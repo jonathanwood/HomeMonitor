@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG" name="HomeMonitor">
+    <Properties>
+        <Property name="PATTERN">%-5level %d [%t] %c:%M(%L): %m%ex%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+<!--        <File name="MinionLog" fileName="${sys:user.home}/.minion/minion.log">
+            <PatternLayout pattern="${PATTERN}"/>
+        </File>-->
+    </Appenders>
+    <Loggers>
+        <Logger name="com.woodcomputing" level="DEBUG" additivity="false">
+            <AppenderRef ref="STDOUT"/>
+<!--            <AppenderRef ref="MinionLog"/>-->
+        </Logger>
+    </Loggers>
+</Configuration>
