@@ -15,10 +15,20 @@
  */
 package com.woodcomputing.homemonitor.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+import lombok.Data;
+
 /**
  *
  * @author <a href="mailto:jonathan@woodcomputing.com">Jonathan Wood</a>
  */
-public class ForecastDay {
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class SimpleForecast {
+    
+    @JsonProperty(value = "forecastday")
+    private List<SimpleForecastDay> forecastDays;
     
 }

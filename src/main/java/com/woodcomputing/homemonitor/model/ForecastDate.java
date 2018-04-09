@@ -22,15 +22,41 @@ import lombok.Data;
 /**
  *
  * @author <a href="mailto:jonathan@woodcomputing.com">Jonathan Wood</a>
- *
  */
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Forecast {
+public class ForecastDate {
     
-    @JsonProperty(value = "txt_forecast")
-    private TextForcast textForcast;
+    private String epoch;
+    private String pretty;
+    private int day;
+    private int month;
+    private int year;
+    private int yday;
+    private int hour;
+    private String min;
+    private int sec;
     
-    @JsonProperty(value = "simpleforecast")
-    private SimpleForecast simpleForecast;
+    @JsonProperty(value = "isdst")
+    private boolean dst;
+    
+    @JsonProperty(value = "monthname")
+    private String monthName;
+
+    @JsonProperty(value = "monthname_short")
+    private String shortMonthName;
+    
+    private String weekday;
+    
+    @JsonProperty(value = "weekday_short")
+    private String shortWeekday;
+    
+    private String ampm;
+    
+    @JsonProperty(value = "tz_short")
+    private String shortTZ;
+
+    @JsonProperty(value = "tz_long")
+    private String longTZ;
+
 }

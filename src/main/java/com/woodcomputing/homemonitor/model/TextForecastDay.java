@@ -13,24 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.woodcomputing.homemonitor.manager;
+package com.woodcomputing.homemonitor.model;
 
-import com.google.inject.Inject;
-import org.apache.http.impl.client.CloseableHttpClient;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 /**
  *
  * @author <a href="mailto:jonathan@woodcomputing.com">Jonathan Wood</a>
  */
-public class WeatherManager {
+@Data
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class TextForecastDay {
     
-    private static final String TEN_DAY_FORECAST_MESSAGE_FORMAT = "http://api.wunderground.com/api/3ea44acbfd56b977/forecast10day/q/OH/Wauseon.json";
-    
-    private final CloseableHttpClient httpClient;
-    
-    @Inject
-    public WeatherManager(CloseableHttpClient httpClient) {
-        this.httpClient = httpClient;
-    }
-        
 }
