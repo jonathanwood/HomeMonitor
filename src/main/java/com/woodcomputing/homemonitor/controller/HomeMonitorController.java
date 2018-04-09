@@ -12,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
 import lombok.extern.log4j.Log4j2;
-import org.apache.logging.log4j.Logger;
 
 /**
  * FXML Controller class
