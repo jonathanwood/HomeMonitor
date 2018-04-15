@@ -38,7 +38,7 @@ public class ForecastDate {
     private int sec;
     
     @JsonProperty(value = "isdst")
-    private boolean dst;
+    private String dst;
     
     @JsonProperty(value = "monthname")
     private String monthName;

@@ -48,13 +48,10 @@ public class WeatherManager {
     @Inject
     public WeatherManager(CloseableHttpClient httpClient) {
         this.httpClient = httpClient;
-    }
-        
-    @FXML public void initialize() {
         tenDayForecastList = FXCollections.observableArrayList(getTenDayForecast());
     }
-    
-    private List<SimpleForecastDay> getTenDayForecast() {
+        
+    List<SimpleForecastDay> getTenDayForecast() {
         List<SimpleForecastDay> forecasts = new ArrayList<>();
         HttpGet get = new HttpGet(TEN_DAY_FORECAST_MESSAGE_FORMAT);
         try(CloseableHttpResponse response = httpClient.execute(get)) {
@@ -66,6 +63,10 @@ public class WeatherManager {
             Logger.getLogger(WeatherManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return forecasts;
+    }
+
+    public ObservableList<SimpleForecastDay> getTenDayForecastList() {
+        return tenDayForecastList;
     }
     
 }
