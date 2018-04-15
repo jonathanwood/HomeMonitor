@@ -15,16 +15,33 @@
  */
 package com.woodcomputing.homemonitor.manager;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.inject.Inject;
+import com.woodcomputing.homemonitor.model.SimpleForecastDay;
+import com.woodcomputing.homemonitor.model.TenDayForecast;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import lombok.extern.log4j.Log4j2;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 /**
  *
  * @author <a href="mailto:jonathan@woodcomputing.com">Jonathan Wood</a>
  */
+@Log4j2
 public class WeatherManager {
     
     private static final String TEN_DAY_FORECAST_MESSAGE_FORMAT = "http://api.wunderground.com/api/3ea44acbfd56b977/forecast10day/q/OH/Wauseon.json";
+    
+    @FXML private ObservableList<SimpleForecastDay> tenDayForecastList;
     
     private final CloseableHttpClient httpClient;
     
@@ -33,4 +50,22 @@ public class WeatherManager {
         this.httpClient = httpClient;
     }
         
+    @FXML public void initialize() {
+        tenDayForecastList = FXCollections.observableArrayList(getTenDayForecast());
+    }
+    
+    private List<SimpleForecastDay> getTenDayForecast() {
+        List<SimpleForecastDay> forecasts = new ArrayList<>();
+        HttpGet get = new HttpGet(TEN_DAY_FORECAST_MESSAGE_FORMAT);
+        try(CloseableHttpResponse response = httpClient.execute(get)) {
+            ObjectMapper mapper = new ObjectMapper();
+            TenDayForecast tenDayForecast = mapper.readValue(response.getEntity().getContent(), TenDayForecast.class);
+            forecasts = tenDayForecast.getForecast().getSimpleForecast().getForecastDays();
+            log.debug("{}", forecasts);
+        } catch (IOException ex) {
+            Logger.getLogger(WeatherManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return forecasts;
+    }
+    
 }

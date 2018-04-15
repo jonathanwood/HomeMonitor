@@ -30,4 +30,7 @@ public class SimpleForecastDay {
     @JsonProperty(value = "date")
     private ForecastDate forecastDate;
     
+    @JsonProperty(value = "icon_url")
+    private String iconURL;
+    
 }

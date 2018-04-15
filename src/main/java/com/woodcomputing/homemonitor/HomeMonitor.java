@@ -25,7 +25,7 @@ public class HomeMonitor extends Application {
                 = Guice.createInjector(new HomeMonitorModule())
                         .getInstance(HomeMonitorController.class);
         final Scene scene = new Scene(hmc);
-        scene.getStylesheets().add("/com/woodcomputing/homemonitoring/css/homemonitor.css");
+        scene.getStylesheets().add("/com/woodcomputing/homemonitor/css/homemonitor.css");
         stage.setScene(scene);
         stage.setFullScreen(true);
         stage.show();
